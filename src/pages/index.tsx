@@ -198,20 +198,22 @@ const QRCode = ({
     width,
   });
   return (
-    <div id={id} className={"flex w-full justify-center"} ref={ref as any}>
+    <div className={"flex w-full justify-center"} ref={ref as any}>
       {width === 0 ? <p className={"text-lg"}>Loading...</p> : null}
       {width !== 0 ? (
-        <Canvas
-          text={text}
-          options={{
-            width: Math.min(ref?.current?.clientWidth ?? Infinity, 440),
-            margin: 2,
-            color: {
-              dark: pixelColor,
-              light: bgColor,
-            },
-          }}
-        />
+        <div id={id}>
+          <Canvas
+            text={text}
+            options={{
+              width: Math.min(ref?.current?.clientWidth ?? Infinity, 440),
+              margin: 2,
+              color: {
+                dark: pixelColor,
+                light: bgColor,
+              },
+            }}
+          />
+        </div>
       ) : null}
     </div>
   );
