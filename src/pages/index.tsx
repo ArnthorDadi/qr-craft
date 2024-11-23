@@ -8,9 +8,7 @@ import html2canvas from "html2canvas";
 import { cn } from "@src/lib/utils";
 
 const Home: NextPage = () => {
-  const [text, setText] = useState(
-    "Wow! This message was created using http://localhost:3000"
-  );
+  const [text, setText] = useState("https://qr-craft-gray.vercel.app/");
   const [bgColor, setBgColor] = useState("#ffffff");
   const [fgColor, setFgColor] = useState("#000000");
 
