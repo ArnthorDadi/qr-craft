@@ -6,11 +6,12 @@ import { useQRCode } from "next-qrcode";
 import type { NextPage } from "next";
 import html2canvas from "html2canvas";
 import { cn } from "@src/lib/utils";
+import usePersistentState from "@src/lib/hooks";
 
 const Home: NextPage = () => {
   const [text, setText] = useState("https://qr-craft-gray.vercel.app/");
-  const [bgColor, setBgColor] = useState("#ffffff");
-  const [fgColor, setFgColor] = useState("#000000");
+  const [bgColor, setBgColor] = usePersistentState("bgColor", "#ffffff");
+  const [fgColor, setFgColor] = usePersistentState("fgColor", "#000000");
 
   const downloadImage = () => {
     const element = document.getElementById("capture");
@@ -129,7 +130,9 @@ const QRColorPickers = ({
         <input
           type="text"
           value={bgColor}
-          onChange={(e) => setBgColor(e.target.value)}
+          onChange={(e) =>
+            e.target.value.length === 7 && setBgColor(e.target.value)
+          }
           className="mt-2 w-[200px] rounded-lg border border-gray-600 px-4 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-400"
           placeholder="Type something..."
         />
@@ -140,7 +143,9 @@ const QRColorPickers = ({
         <input
           type="text"
           value={fgColor}
-          onChange={(e) => setFgColor(e.target.value)}
+          onChange={(e) =>
+            e.target.value.length === 7 && setFgColor(e.target.value)
+          }
           className="mt-2 w-[200px] rounded-lg border border-gray-600 px-4 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-400"
           placeholder="Type something..."
         />
@@ -194,9 +199,7 @@ const QRCode = ({
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  console.log("test", {
-    width,
-  });
+
   return (
     <div className={"flex w-full justify-center"} ref={ref as any}>
       {width === 0 ? <p className={"text-lg"}>Loading...</p> : null}
