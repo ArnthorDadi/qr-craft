@@ -206,7 +206,7 @@ const QRCode = ({
       {width !== 0 ? (
         <div id={id}>
           <Canvas
-            text={text}
+            text={text || "https://qr-craft-gray.vercel.app/"}
             options={{
               width: Math.min(ref?.current?.clientWidth ?? Infinity, 440),
               margin: 2,
